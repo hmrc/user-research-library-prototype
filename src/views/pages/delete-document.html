@@ -1,0 +1,51 @@
+{% extends '../helpers/govukTemplate.html' %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <span class="govuk-caption-xl">{{ t("project:caption") }}</span>
+            <h1 class="govuk-heading-xl">{{ project.projectName }}</h1>
+
+
+            <h1 class="govuk-heading-l">{{ t("deleteDocument:header") }}</h1>
+
+                <form method="post" action="delete" autocomplete="off">
+                    <table class="govuk-table">
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th scope="col" class="govuk-table__header">Document Name</th>
+                                <th scope="col" class="govuk-table__header">Document Type</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
+                                    <a class="govuk-link" href="{{ document.documentLink }}" target="_blank"> 
+                                        {{ document.documentName }}
+                                    </a>
+                                </td>
+                                <td class="govuk-table__cell">{{ document.documentType }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    {{ govukButton({
+                        text: t("app:button.confirm-removal"),
+                        preventDoubleClick: true
+                    }) }}
+
+                </form>    
+                <p class="govuk-body">
+                    <a class="govuk-link" href="/projects/{{project.id}}">{{ t("app:link.cancel") }}</a>
+                </p>
+                
+            </div>
+        </div>
+
+{% endblock %}

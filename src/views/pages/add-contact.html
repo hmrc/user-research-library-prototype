@@ -1,0 +1,58 @@
+{% extends '../helpers/govukTemplate.html' %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% block content %}
+
+  {% if errors %}
+    {{ govukErrorSummary({
+      titleText: t("addContact:errors.header"),
+      errorList: errors.errorSummary
+    }) }}
+  {% endif %}
+
+  {% call govukFieldset({
+    legend: {
+      text: t("addContact:header"),
+      classes: "govuk-fieldset__legend--xl",
+      isPageHeading: true
+    }
+  }) %}
+
+  <form method="post" action="add" autocomplete="off">
+
+    {{ govukInput({
+      label: {
+        html: t("addContact:input.contact_name.label")
+      },
+      id: "contact-name",
+      name: "contact-name",
+      errorMessage: errors.contactName
+    }) }}
+
+    {{ govukInput({
+      label: {
+        html: t("addContact:input.contact_email.label")
+      },
+      id: "contact-email",
+      name: "contact-email",
+      errorMessage: errors.contactEmail
+    }) }}
+
+    {% endcall %}
+
+    {{ govukButton({
+      text: t("app:button.submit"),
+      preventDoubleClick: true
+    }) }}
+
+    <p class="govuk-body">
+      <a class="govuk-link" href="/projects/{{project.id}}">{{ t("app:link.cancel") }}</a>
+    </p>
+
+  </form>
+    
+{% endblock %}

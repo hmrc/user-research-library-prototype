@@ -1,0 +1,15 @@
+{
+    "service_name": "User Research Library",
+    "button": {
+        "continue": "Continue",
+        "submit": "Submit",
+        "confirm-removal": "Confirm removal"
+    },
+    "link": {
+        "back": "Back",
+        "cancel": "Cancel"
+    },
+    "error-message" : {
+        "visuallyHiddenText": "Error"
+    }
+}

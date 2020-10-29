@@ -1,0 +1,85 @@
+{% extends '../helpers/govukTemplate.html' %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% block content %}
+
+  {% if errors %}
+    {{ govukErrorSummary({
+      titleText: t("createDocument:errors.header"),
+      errorList: errors.errorSummary
+    }) }}
+  {% endif %}
+
+  {% call govukFieldset({
+    legend: {
+      text: t("createDocument:header"),
+      classes: "govuk-fieldset__legend--xl",
+      isPageHeading: true
+    }
+  }) %}
+
+  <form method="post" action="create" autocomplete="off">
+
+    {{ govukInput({
+      label: {
+        html: t("createDocument:input.document_name.label")
+      },
+      id: "document-name",
+      name: "document-name",
+      errorMessage: errors.documentName
+    }) }}
+
+    {{ govukInput({
+      label: {
+        html: t("createDocument:input.document_link.label")
+      },
+      id: "document-link",
+      name: "document-link",
+      errorMessage: errors.documentLink
+    }) }}
+
+    {{ govukSelect({
+        id: "document-type",
+        name: "document-type",
+        label: {
+            text: t("createDocument:select.document_type.label")
+        },
+        items: [
+            {
+                value: "Personas",
+                text: t("createDocument:select.document_type.items.personas"),
+                selected: true                       
+            },
+            {
+                value: "User Needs",
+                text: t("createDocument:select.document_type.items.user_needs")
+            },
+            {
+                value: "User Journeys",
+                text: t("createDocument:select.document_type.items.user_journeys")
+            },
+            {
+                value: "Core Research",
+                text: t("createDocument:select.document_type.items.core_research")
+            }
+        ]
+    }) }}
+
+    {% endcall %}
+
+    {{ govukButton({
+      text: t("app:button.submit"),
+      preventDoubleClick: true
+    }) }}
+
+    <p class="govuk-body">
+      <a class="govuk-link" href="/projects/{{project.id}}">{{ t("app:link.cancel") }}</a>
+    </p>
+
+  </form>
+    
+{% endblock %}

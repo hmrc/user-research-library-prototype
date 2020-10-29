@@ -1,0 +1,113 @@
+{% extends '../helpers/govukTemplate.html' %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/projects",
+    text: t("app:link.back")
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <span class="govuk-caption-xl">{{ t("project:caption") }}</span>
+            <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">{{ project.projectName }}</h1>
+            <span class="govuk-caption-m">{{ project.projectPhase }}</span>
+
+            <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+            <h2 class="govuk-heading-m">Details</h2>
+
+            <p class="govuk-body govuk-!-padding-bottom-3">{{ project.projectDetails }}</p>
+
+            <p class="govuk-body">
+                <a href="/projects/{{ project.id }}/edit" class="govuk-link">Edit project details</a>
+            </p>
+
+            <div class="govuk-tabs" data-module="govuk-tabs">
+                <ul class="govuk-tabs__list">
+                    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                        <a class="govuk-tabs__tab" href="#past-day">
+                            Documents
+                        </a>
+                    </li>
+                    <li class="govuk-tabs__list-item">
+                        <a class="govuk-tabs__tab" href="#past-week">
+                            Contacts
+                        </a>
+                    </li>
+                </ul>
+                <section class="govuk-tabs__panel" id="past-day">
+
+                    <h2 class="govuk-heading-l">Research Documents</h2>
+
+                    <p class="govuk-body"><a href="/projects/{{ project.id }}/documents/create" class="govuk-link">Add a document</a></p>
+
+                    <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Document Name</th>
+                            <th scope="col" class="govuk-table__header">Document Type</th>
+                            <th scope="col" class="govuk-table__header"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% for document in documents %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
+                                <a class="govuk-link" href="{{ document.documentLink }}" target="_blank"> 
+                                    {{ document.documentName }}
+                                </a>
+                            </td>
+                            <td class="govuk-table__cell">{{ document.documentType }}</td>
+                            <td class="govuk-table__cell">
+                                <a class="govuk-link" href="/projects/{{ project.id }}/documents/{{ document.id }}/delete"> 
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </section>
+
+                <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
+
+                    <h2 class="govuk-heading-l">Key Contacts</h2>
+
+                    <p class="govuk-body"><a href="/projects/{{ project.id }}/contacts/add" class="govuk-link">Add a contact</a></p>
+
+                    <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">Name</th>
+                            <th scope="col" class="govuk-table__header">Email Address</th>
+                            <th scope="col" class="govuk-table__header"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% for contact in contacts %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">{{ contact.contactName }}</td>
+                            <td class="govuk-table__cell">{{ contact.contactEmail }}</td>
+                            <td class="govuk-table__cell">
+                                <a class="govuk-link" href="/projects/{{ project.id }}/contacts/{{ contact.id }}/delete"> 
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

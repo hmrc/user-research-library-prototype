@@ -1,0 +1,31 @@
+{
+    "header": "Create Document",
+    "errors": {
+        "header": "There is a problem"
+    },
+    "input": {
+        "document_name": {
+            "label": "Document Name",
+            "errors": {
+                "required": "You must enter a document name."
+            }
+        },
+        "document_link": {
+            "label": "Document Link",
+            "errors": {
+                "required": "You must enter a document link."
+            }
+        }
+    },
+    "select": {
+        "document_type": {
+            "label": "Document Type",
+            "items": {
+                "personas": "Personas",
+                "user_needs": "User Needs",
+                "user_journeys": "User journeys",
+                "core_research": "Core research"
+            }
+        }
+    }
+}

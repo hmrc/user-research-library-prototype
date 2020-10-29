@@ -1,0 +1,93 @@
+{% extends '../helpers/govukTemplate.html' %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    href: "/projects",
+    text: t("app:link.back")
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  {% if errors %}
+    {{ govukErrorSummary({
+      titleText: t("createProject:errors.header"),
+      errorList: errors.errorSummary
+    }) }}
+  {% endif %}
+
+  {% call govukFieldset({
+    legend: {
+      text: t("createProject:header"),
+      classes: "govuk-fieldset__legend--xl",
+      isPageHeading: true
+    }
+  }) %}
+
+  <form method="post" action="create" autocomplete="off">
+
+    {{ govukInput({
+      label: {
+        html: t("createProject:input.project_name.label")
+      },
+      id: "project-name",
+      name: "project-name",
+      errorMessage: errors.projectName
+    }) }}
+
+    {{ govukTextarea({
+      name: "details",
+      id: "details",
+      label: {
+        text: t("createProject:text_area.details.label")
+      },
+      hint: {
+        text: t("createProject:text_area.details.hint")
+      },
+      errorMessage: errors.details
+    }) }}
+
+    {{ govukSelect({
+        id: "phase",
+        name: "phase",
+        label: {
+            text: t("createProject:select.phase.label")
+        },
+        items: [
+            {
+                value: "Alpha",
+                text: t("createProject:select.phase.items.alpha"),
+                selected: true                       
+            },
+            {
+                value: "Beta",
+                text: t("createProject:select.phase.items.beta")
+            },
+            {
+                value: "Discovery",
+                text: t("createProject:select.phase.items.discovery")
+            },
+            {
+                value: "Live",
+                text: t("createProject:select.phase.items.live")
+            }
+        ]
+    }) }}
+
+    {% endcall %}
+
+    {{ govukButton({
+      text: t("app:button.submit"),
+      preventDoubleClick: true
+    }) }}
+
+  </form>
+    
+{% endblock %}

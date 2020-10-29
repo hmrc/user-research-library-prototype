@@ -1,0 +1,20 @@
+{
+  "header": "Add Contact",
+  "errors": {
+      "header": "There is a problem"
+  },
+  "input": {
+      "contact_name": {
+          "label": "Contact Name",
+          "errors": {
+              "required": "You must enter a contact name."
+          }
+      },
+      "contact_email": {
+          "label": "Contact Email Address",
+          "errors": {
+              "required": "You must enter an email address."
+          }
+      }
+  }
+}

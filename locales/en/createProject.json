@@ -1,0 +1,34 @@
+{
+    "header": "Create Project",
+    "errors": {
+        "header": "There is a problem"
+    },
+    "input": {
+        "project_name": {
+            "label": "Project Name",
+            "errors": {
+                "required": "You must enter a project name."
+            }
+        }
+    },
+    "text_area": {
+        "details": {
+            "label": "Details",
+            "hint": "Do not include any sensitive information.",
+            "errors": {
+                "required": "You must enter some details."
+            }
+        }
+    },
+    "select": {
+        "phase": {
+            "label": "Current Phase",
+            "items": {
+                "alpha": "Alpha",
+                "beta": "Beta",
+                "discovery": "Discovery",
+                "live": "Live"
+            }
+        }
+    }
+}
