@@ -43,7 +43,7 @@
     "gulp-nodemon": "2.4.2",
     "gulp-plumber": "1.2.1",
     "gulp-sass": "^4.0.2",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "nock": "^11.7.0",
     "nodemon": "^2.0.1"
   }
